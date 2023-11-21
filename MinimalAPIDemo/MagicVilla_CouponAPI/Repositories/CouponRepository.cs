@@ -1,6 +1,6 @@
 ﻿using MagicVilla_CouponAPI.Data;
 using MagicVilla_CouponAPI.Repositories.IRepsitories;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace MagicVilla_CouponAPI.Repositories
 {
@@ -18,14 +18,14 @@ namespace MagicVilla_CouponAPI.Repositories
            await _db.AddAsync(coupon);
         }
 
-        public async Task<ICollection<Coupon>> GetAllAsync()
+        public async Task<IEnumerable<Coupon>> GetAllAsync()
         {
             return await _db.Coupons.ToListAsync();
         }
 
         public async Task<Coupon> GetAsync(int id)
         {
-            return await _db.Coupons.SingleOrDefaultAsync( x => x.Id == id);
+            return await _db.Coupons.FirstOrDefaultAsync( x => x.Id == id);
         }
 
         public async Task<Coupon> GetAsync(string couponName)

@@ -2,7 +2,7 @@
 {
     public interface ICouponRepository
     {
-        Task<ICollection<Coupon>> GetAllAsync();
+        Task<IEnumerable<Coupon>> GetAllAsync();
         Task<Coupon> GetAsync(int id);
         Task<Coupon> GetAsync(string couponName);
         Task CreateAsync(Coupon coupon);
