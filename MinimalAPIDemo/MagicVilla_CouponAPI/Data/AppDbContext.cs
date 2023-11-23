@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MagicVilla_CouponAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MagicVilla_CouponAPI.Data
 {
@@ -10,6 +11,7 @@ namespace MagicVilla_CouponAPI.Data
         }
 
         public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

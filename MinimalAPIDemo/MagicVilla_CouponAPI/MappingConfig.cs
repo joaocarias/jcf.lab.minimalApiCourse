@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MagicVilla_CouponAPI.Models;
 using MagicVilla_CouponAPI.Models.DTO;
 
 namespace MagicVilla_CouponAPI
@@ -9,6 +10,10 @@ namespace MagicVilla_CouponAPI
         { 
             CreateMap<Coupon,  CouponCreateDTO>().ReverseMap();
             CreateMap<Coupon,  CouponDTO>().ReverseMap();
+            CreateMap<Coupon, CouponUpdateDTO>().ReverseMap();
+
+            CreateMap<User,  UserDTO>().ReverseMap();    
+
         }
     }
 }
