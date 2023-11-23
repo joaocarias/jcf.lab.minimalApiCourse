@@ -28,14 +28,14 @@ namespace MagicVilla_CouponAPI.Endpoints
 
             app.MapDelete("/api/coupon/{id:int}", DeleteCoupon);
 
-            app.MapGet("/api/coupon/special", async (string CouponName, int PageSize, int Page, ILogger<Program> _logger, AppDbContext _db) =>
+            app.MapGet("/api/coupon/special", ([AsParameters] CouponRequest req, AppDbContext _db) =>
             {
-                if (CouponName != null)
+                if (req.CouponName != null)
                 {
-                    return await _db.Coupons.Where(x => x.Name.Contains(CouponName)).Skip((Page - 1) * PageSize).Take(PageSize).ToListAsync();
+                    return _db.Coupons.Where(x => x.Name.Contains(req.CouponName)).Skip((req.Page - 1) * req.PageSize).Take(req.PageSize);
                 }
 
-                return await _db.Coupons.Skip((Page - 1) * PageSize).Take(PageSize).ToListAsync();
+                return _db.Coupons.Skip((req.Page - 1) * req.PageSize).Take(req.PageSize);
             });
         }
 
@@ -155,4 +155,16 @@ namespace MagicVilla_CouponAPI.Endpoints
 
         #endregion
     }
+
+    class CouponRequest
+    {
+        public string CouponName { get; set; }
+        [FromHeader(Name = "PageSize")]
+        public int PageSize { get; set; }
+        [FromHeader(Name = "Page")]
+        public int Page { get; set; }
+        public ILogger<CouponRequest> Logger { get; set; }
+    }
 }
+
+
